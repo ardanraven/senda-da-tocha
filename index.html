@@ -9,11 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Ubuntu:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS GERAL E RESET (AFETA TUDO) */
+        /* CSS GERAL E RESET */
         *, *:before, *:after {
             margin: 0;
             padding: 0;
-            word-break: break-word;
+            overflow-wrap: break-word; /* Corrigido para melhor quebra de linha */
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
@@ -21,10 +21,10 @@
             font-size: 10px;
         }
         body {
-             background: black; /* Fundo preto para toda a página */
+             background: black;
         }
 
-        /* ESTILOS ESPECÍFICOS PARA A PRIMEIRA TELA (HERO SECTION) USANDO TAILWIND */
+        /* ESTILOS DA PRIMEIRA TELA (HERO SECTION) */
         .hero-section {
             font-family: 'Inter', sans-serif; 
         }
@@ -46,30 +46,19 @@
             background-position: center;
         }
         
-        /* ESTILOS PARA O CONTEÚDO APÓS A PRIMEIRA TELA */
+        /* ESTILOS DO CONTEÚDO APÓS A PRIMEIRA TELA */
         .content-body {
             font-family: 'Ubuntu', sans-serif;
             color: #EAEAEA;
             font-size: 1.8rem;
             line-height: 1.7;
         }
-        .content-body header, .content-body footer {
-            display: block;
-        }
-        .content-body a, .content-body a:link, .content-body a:visited {
+        .content-body a {
             text-decoration: none;
             color: #D4AF37;
         }
         .content-body a:hover {
             text-decoration: underline;
-        }
-        .content-body img {
-            border: 0;
-            max-width: 100%;
-            height: auto;
-        }
-        .content-body ul {
-            list-style: none;
         }
         
         .fade-in {
@@ -104,12 +93,8 @@
              margin-bottom: 1rem;
         }
         
-        .text-center { text-align: center; }
-        
         .grid { display: grid; gap: 2.5rem; }
         .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-        @media (min-width: 768px) { .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
         
         .module-card {
             border: 1px solid rgba(212, 175, 55, 0.3);
@@ -145,107 +130,86 @@
             content: "";
         }
         .candle {
-            bottom: 0;
-            width: 150px;
-            height: 300px;
-            border-radius: 150px / 40px;
+            bottom: 0; width: 150px; height: 300px; border-radius: 150px / 40px;
             box-shadow: inset 20px -30px 50px 0 rgba(0, 0, 0, 0.4), inset -20px 0 50px 0 rgba(0, 0, 0, 0.4);
-            background: #190f02;
             background: linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #1c0900);
         }
         .candle:before {
-            width: 100%;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #d47401;
-            background: #b86409;
+            width: 100%; height: 40px; border-radius: 50%; border: 2px solid #d47401;
             background: radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
         }
         .candle:after {
-            width: 34px;
-            height: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            top: 14px;
-            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-            background: radial-gradient(rgba(0, 0, 0, 0.6), transparent 45%);
+            width: 34px; height: 10px; left: 50%; transform: translateX(-50%); border-radius: 50%; top: 14px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5); background: radial-gradient(rgba(0, 0, 0, 0.6), transparent 45%);
         }
         .thread {  
-            width: 6px;
-            height: 36px;
-            top: -17px;
-            left: 50%;
-            z-index: 1;
-            border-radius: 40% 40% 0 0;
-            transform: translateX(-50%);
-            background: #121212;
-            background: linear-gradient(#d6994a, #4b232c, #121212, black, #e8bb31 90%);
+            width: 6px; height: 36px; top: -17px; left: 50%; z-index: 1; border-radius: 40% 40% 0 0;
+            transform: translateX(-50%); background: linear-gradient(#d6994a, #4b232c, #121212, black, #e8bb31 90%);
         }
         .flame {
-            width: 24px;
-            height: 120px;
-            left: 50%;
-            transform-origin: 50% 100%;
-            transform: translateX(-50%);
-            bottom: 100%;
-            border-radius: 50% 50% 20% 20%;
-            background: rgba(255, 255, 255, 1);
-            background: linear-gradient(white 80%, transparent);
+            width: 24px; height: 120px; left: 50%; transform-origin: 50% 100%; transform: translateX(-50%);
+            bottom: 100%; border-radius: 50% 50% 20% 20%; background: linear-gradient(white 80%, transparent);
             animation: moveFlame 6s linear infinite, enlargeFlame 5s linear infinite;
         }
         .flame:before {
-            width: 100%;
-            height: 100%;
-            border-radius: 50% 50% 20% 20%;
+            width: 100%; height: 100%; border-radius: 50% 50% 20% 20%;
             box-shadow: 0 0 15px 0 rgba(247, 93, 0, .4), 0 -6px 4px 0 rgba(247, 128, 0, .7);
         }
-        @keyframes moveFlame {
-            0%, 100% { transform: translateX(-50%) rotate(-2deg); }
-            50% { transform: translateX(-50%) rotate(2deg); }
-        }
-        @keyframes enlargeFlame {
-            0%, 100% { height: 120px; }
-            50% { height: 140px; }
-        }
+        @keyframes moveFlame { 0%, 100% { transform: translateX(-50%) rotate(-2deg); } 50% { transform: translateX(-50%) rotate(2deg); } }
+        @keyframes enlargeFlame { 0%, 100% { height: 120px; } 50% { height: 140px; } }
         .glow {
-            width: 26px;
-            height: 60px;
-            border-radius: 50% 50% 35% 35%;
-            left: 50%;
-            top: -48px;
-            transform: translateX(-50%);
-            background: rgba(220, 138, 12, .7);
+            width: 26px; height: 60px; border-radius: 50% 50% 35% 35%; left: 50%; top: -48px;
+            transform: translateX(-50%); background: rgba(220, 138, 12, .7);
             box-shadow: 0 -40px 30px 0 #dc8a0c, 0 40px 50px 0 #dc8a0c, inset 3px 0 2px 0 rgba(220, 138, 12, .6), inset -3px 0 2px 0 rgba(220, 138, 12, .6);
         }
         .glow:before {
-            width: 70%;
-            height: 60%;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 0;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.35);
+            width: 70%; height: 60%; left: 50%; transform: translateX(-50%); bottom: 0;
+            border-radius: 50%; background: rgba(0, 0, 0, 0.35);
         }
         .blinking-glow {
-            width: 100px;
-            height: 180px;
-            left: 50%;
-            top: -55%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            background: #ff6000;
-            filter: blur(60px);
-            animation: blinkIt .1s infinite;
+            width: 100px; height: 180px; left: 50%; top: -55%; transform: translateX(-50%);
+            border-radius: 50%; background: #ff6000; filter: blur(60px); animation: blinkIt .1s infinite;
         }
-        @keyframes blinkIt {
-            50% { opacity: .8; }
+        @keyframes blinkIt { 50% { opacity: .8; } }
+
+        /* REGRAS DE RESPONSIVIDADE PARA CELULARES */
+        @media (min-width: 768px) { .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        @media (max-width: 767px) {
+            html {
+                font-size: 9.5px; /* Ajuste fino para caber mais texto */
+            }
+            .section-container h2 {
+                font-size: 3.2rem;
+            }
+            .section-container h3 {
+                font-size: 2.1rem;
+            }
+            .content-body {
+                font-size: 1.7rem;
+            }
+            .section-container {
+                padding: 6rem 0;
+            }
+            #sacerdote-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            #sacerdote-container > div {
+                 width: 100%;
+            }
+            #sacerdote-container p {
+                text-align: justify;
+            }
+             #sacerdote-container h2 {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section (Usa Tailwind e estilos específicos no <style>) -->
+    <!-- Hero Section -->
     <header class="hero-section hero-bg h-screen flex flex-col items-center justify-center text-center p-6 relative">
         <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
         <div class="relative z-10">
@@ -260,7 +224,7 @@
         </div>
     </header>
 
-    <!-- Restante do conteúdo (Usa o novo CSS customizado) -->
+    <!-- Restante do conteúdo -->
     <div class="content-body">
         <main>
             <div class="section-container">
@@ -271,7 +235,7 @@
                         </svg>
                     </div>
                     <h2 class="fade-in">Você Sente o Chamado da Encruzilhada?</h2>
-                    <p class="fade-in" style="transition-delay: 200ms; color: #a0a0a0; max-width: 80ch; margin: 1.5rem auto 0;">
+                    <p class="fade-in" style="transition-delay: 200ms; color: #a0a0a0; max-width: 80ch; margin: 1.5rem auto 0; text-align: justify;">
                         É uma inquietação na alma, uma busca por sabedoria ancestral e poder pessoal. Hekate, a Rainha das Bruxas, Guardiã das Chaves e Senhora das Tochas, te chama para uma jornada de autoconhecimento, magia e devoção. Este caminho não é para todos. É para aqueles que ousam caminhar entre os mundos, que encaram suas sombras para encontrar sua luz mais brilhante.
                     </p>
                 </div>
@@ -338,12 +302,12 @@
 
             <div style="background-color: #0A0A0A; padding: 10rem 0;">
                 <div class="section-container" style="padding: 0;">
-                    <div style="display: flex; flex-direction: column; align-items: center; gap: 5rem;" class="md:flex-row">
-                        <div class="fade-in md:w-1/3" style="flex-shrink: 0;">
+                    <div id="sacerdote-container" style="display: flex; align-items: center; gap: 5rem;">
+                        <div class="fade-in" style="flex-shrink: 0;">
                             <img src="https://i.ibb.co/nXWYCV0/dasfdasffsa.jpg" alt="Retrato do Sacerdote Leonardo" style="border-radius: 50%; border: 4px solid rgba(212, 175, 55, 0.5); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); width: 300px; height: 300px; margin: 0 auto; object-fit: cover;">
                         </div>
-                        <div class="fade-in md:w-2/3" style="transition-delay: 200ms; text-align: center;" class="md:text-left">
-                            <h2 style="text-align: inherit; font-size: 3.5rem;">Seu Guia Nesta Jornada</h2>
+                        <div class="fade-in" style="transition-delay: 200ms;">
+                            <h2 style="font-size: 3.5rem;">Seu Guia Nesta Jornada</h2>
                             <p style="color: #D4AF37; font-family: 'Cinzel', serif; font-size: 2rem;">Sacerdote Leonardo</p>
                             <p style="color: #a0a0a0; text-align: justify; margin-top: 1.5rem;">
                                 "Dediquei minha vida a trilhar os caminhos sinuosos de Hekate, não apenas como um estudioso, mas como Seu devoto. Minha missão é ser um farol para aqueles que são chamados, guiando-os com responsabilidade, profundidade e honra. Neste curso, eu não compartilharei apenas conhecimento; compartilharei a chama que arde em meu coração, a chama que me foi confiada pela própria Deusa. Estou aqui para caminhar ao seu lado, na escuridão e na luz."
@@ -375,7 +339,7 @@
                 <p class="fade-in" style="transition-delay: 200ms; font-size: 2rem;">Qual caminho você irá escolher?</p>
                 <div class="fade-in" style="margin-top: 3rem; background-color: #050505; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; transition-delay: 400ms;">
                     <h3 style="color: #D4AF37; font-size: 2.2rem;">Jornada Mágica: A Senda das Tochas</h3>
-                    <p style="margin-top: 1.5rem; color: #a0a0a0;">Acesso aos 6 módulos, comunidade exclusiva e suporte direto com Sacerdote Leonardo.</p>
+                    <p style="margin-top: 1.5rem; color: #a0a0a0;">Acesso aos 6 módulos, comunidade exclusiva, rituais ao vivo e suporte direto com Sacerdote Leonardo.</p>
                     <a href="https://wa.me/5541999767744?text=Olá%2C%20Sacerdote%20Leonardo!%20Tenho%20interesse%20na%20jornada%20'A%20Senda%20das%20Tochas'%20e%20gostaria%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" style="margin-top: 3rem; display: inline-block; background-color: #D4AF37; color: #000000; font-family: 'Cinzel', serif; font-weight: bold; text-transform: uppercase; padding: 1.5rem 3rem; border-radius: 8px; transition: all 0.3s ease; border: 2px solid #D4AF37;">
                         Conversar com o Sacerdote
                     </a>
