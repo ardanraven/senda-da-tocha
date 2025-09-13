@@ -13,7 +13,7 @@
         *, *:before, *:after {
             margin: 0;
             padding: 0;
-            overflow-wrap: break-word; /* Corrigido para melhor quebra de linha */
+            overflow-wrap: break-word;
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
@@ -22,341 +22,346 @@
         }
         body {
              background: black;
+             margin: 0;
+             overflow: hidden; /* Prevenir scroll durante a intro */
         }
 
-        /* ESTILOS DA PRIMEIRA TELA (HERO SECTION) */
-        .hero-section {
-            font-family: 'Inter', sans-serif; 
+        /* ESTILOS DA INTRO */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
+            background-color: black;
+            display: grid;
+            user-select: none;
+            transition: opacity 1.5s ease-out;
         }
-        .font-cinzel-hero {
-            font-family: 'Cinzel', serif;
+        #intro-screen > * {
+            grid-row: 1;
+            grid-column: 1;
         }
-        .text-gold-hero {
-            color: #D4AF37;
+        #intro-canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .bg-gold-hero {
-            background-color: #D4AF37;
+        #intro-screen main {
+            display: grid;
         }
-        .shadow-gold-hero {
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4), 0 0 5px rgba(212, 175, 55, 0.6);
+        #intro-screen main > * {
+            grid-row: 1;
+            grid-column: 1;
         }
+        #intro-screen article {
+            position: relative;
+            align-self: center;
+            justify-self: center;
+            width: auto;
+            max-width: 90%;
+            padding: 2rem;
+            font: bold 20px/1 'Ubuntu', sans-serif;
+            color: #b5b5b5;
+            text-rendering: optimizeLegibility;
+            text-align: center;
+        }
+        #intro-screen article > h2 {
+            font-size: 3em;
+            opacity: 0;
+            animation: fade-in 5s forwards 0s;
+            margin: 0;
+            line-height: 1.6;
+        }
+        #intro-screen article > p {
+            opacity: 0;
+            animation: fade-in 5s forwards 1s;
+            margin: 0;
+            line-height: 1.2;
+            font-size: 2em;
+        }
+        #intro-screen article.impact p {
+            font-size: 6rem;
+            line-height: 1;
+            color: #c51;
+            animation: fade-in 5s forwards 0s;
+        }
+        .hide {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 1s, opacity 1s linear;
+        }
+        .hide > * {
+            animation: fade-out 1s forwards 0s;
+        }
+        @keyframes fade-in {
+            80% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fade-out {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* ESTILOS DA PÁGINA PRINCIPAL */
+        .hero-section { font-family: 'Inter', sans-serif; }
+        .font-cinzel-hero { font-family: 'Cinzel', serif; }
+        .text-gold-hero { color: #D4AF37; }
+        .bg-gold-hero { background-color: #D4AF37; }
+        .shadow-gold-hero { box-shadow: 0 0 15px rgba(212, 175, 55, 0.4), 0 0 5px rgba(212, 175, 55, 0.6); }
         .hero-bg {
             background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.8), rgba(5, 5, 5, 1)), url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
         }
-        
-        /* ESTILOS DO CONTEÚDO APÓS A PRIMEIRA TELA */
         .content-body {
-            font-family: 'Ubuntu', sans-serif;
-            color: #EAEAEA;
-            font-size: 1.8rem;
-            line-height: 1.7;
+            font-family: 'Ubuntu', sans-serif; color: #EAEAEA; font-size: 1.8rem; line-height: 1.7;
         }
-        .content-body a {
-            text-decoration: none;
-            color: #D4AF37;
-        }
-        .content-body a:hover {
-            text-decoration: underline;
-        }
-        
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-container {
-            width: 90%;
-            max-width: 1170px;
-            margin: 0 auto;
-            padding: 10rem 0;
-        }
-
-        .section-container h2 {
-            font-family: 'Cinzel', serif;
-            color: #D4AF37;
-            font-size: 4.5rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-        .section-container h3 {
-             font-family: 'Cinzel', serif;
-             color: #EAEAEA;
-             font-size: 2.4rem;
-             margin-bottom: 1rem;
-        }
-        
+        .content-body a { text-decoration: none; color: #D4AF37; }
+        .content-body a:hover { text-decoration: underline; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .section-container { width: 90%; max-width: 1170px; margin: 0 auto; padding: 10rem 0; }
+        .section-container h2 { font-family: 'Cinzel', serif; color: #D4AF37; font-size: 4.5rem; text-align: center; margin-bottom: 2rem; font-weight: 700; }
+        .section-container h3 { font-family: 'Cinzel', serif; color: #EAEAEA; font-size: 2.4rem; margin-bottom: 1rem; }
         .grid { display: grid; gap: 2.5rem; }
         .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-        
-        .module-card {
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 2.5rem;
-            border-radius: 12px;
-            background-color: #050505;
-            transition: all 0.3s ease;
-        }
-        .module-card:hover {
-            border-color: #D4AF37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-            transform: translateY(-5px);
-        }
+        .module-card { border: 1px solid rgba(212, 175, 55, 0.3); padding: 2.5rem; border-radius: 12px; background-color: #050505; transition: all 0.3s ease; }
+        .module-card:hover { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); transform: translateY(-5px); }
         .module-card p { color: #a0a0a0; }
         .module-card-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
-        .module-card-header svg {
-            width: 3rem;
-            height: 3rem;
-            color: #D4AF37;
-            margin-right: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        /* ANIMAÇÃO DA VELA */
-        .holder {
-            margin: 12rem auto;
-            width: 150px;
-            height: 400px;
-            position: relative;
-        }
-        .holder *, .holder *:before, .holder *:after {
-            position: absolute;
-            content: "";
-        }
-        .candle {
-            bottom: 0; width: 150px; height: 300px; border-radius: 150px / 40px;
-            box-shadow: inset 20px -30px 50px 0 rgba(0, 0, 0, 0.4), inset -20px 0 50px 0 rgba(0, 0, 0, 0.4);
-            background: linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #1c0900);
-        }
-        .candle:before {
-            width: 100%; height: 40px; border-radius: 50%; border: 2px solid #d47401;
-            background: radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
-        }
-        .candle:after {
-            width: 34px; height: 10px; left: 50%; transform: translateX(-50%); border-radius: 50%; top: 14px;
-            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5); background: radial-gradient(rgba(0, 0, 0, 0.6), transparent 45%);
-        }
-        .thread {  
-            width: 6px; height: 36px; top: -17px; left: 50%; z-index: 1; border-radius: 40% 40% 0 0;
-            transform: translateX(-50%); background: linear-gradient(#d6994a, #4b232c, #121212, black, #e8bb31 90%);
-        }
-        .flame {
-            width: 24px; height: 120px; left: 50%; transform-origin: 50% 100%; transform: translateX(-50%);
-            bottom: 100%; border-radius: 50% 50% 20% 20%; background: linear-gradient(white 80%, transparent);
-            animation: moveFlame 6s linear infinite, enlargeFlame 5s linear infinite;
-        }
-        .flame:before {
-            width: 100%; height: 100%; border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 15px 0 rgba(247, 93, 0, .4), 0 -6px 4px 0 rgba(247, 128, 0, .7);
-        }
+        .module-card-header svg { width: 3rem; height: 3rem; color: #D4AF37; margin-right: 1.5rem; flex-shrink: 0; }
+        .holder { margin: 12rem auto; width: 150px; height: 400px; position: relative; }
+        .holder *, .holder *:before, .holder *:after { position: absolute; content: ""; }
+        .candle { bottom: 0; width: 150px; height: 300px; border-radius: 150px / 40px; box-shadow: inset 20px -30px 50px 0 rgba(0, 0, 0, 0.4), inset -20px 0 50px 0 rgba(0, 0, 0, 0.4); background: linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #1c0900); }
+        .candle:before { width: 100%; height: 40px; border-radius: 50%; border: 2px solid #d47401; background: radial-gradient(#eaa121, #8e4901 45%, #b86409 80%); }
+        .candle:after { width: 34px; height: 10px; left: 50%; transform: translateX(-50%); border-radius: 50%; top: 14px; box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5); background: radial-gradient(rgba(0, 0, 0, 0.6), transparent 45%); }
+        .thread { width: 6px; height: 36px; top: -17px; left: 50%; z-index: 1; border-radius: 40% 40% 0 0; transform: translateX(-50%); background: linear-gradient(#d6994a, #4b232c, #121212, black, #e8bb31 90%); }
+        .flame { width: 24px; height: 120px; left: 50%; transform-origin: 50% 100%; transform: translateX(-50%); bottom: 100%; border-radius: 50% 50% 20% 20%; background: linear-gradient(white 80%, transparent); animation: moveFlame 6s linear infinite, enlargeFlame 5s linear infinite; }
+        .flame:before { width: 100%; height: 100%; border-radius: 50% 50% 20% 20%; box-shadow: 0 0 15px 0 rgba(247, 93, 0, .4), 0 -6px 4px 0 rgba(247, 128, 0, .7); }
         @keyframes moveFlame { 0%, 100% { transform: translateX(-50%) rotate(-2deg); } 50% { transform: translateX(-50%) rotate(2deg); } }
         @keyframes enlargeFlame { 0%, 100% { height: 120px; } 50% { height: 140px; } }
-        .glow {
-            width: 26px; height: 60px; border-radius: 50% 50% 35% 35%; left: 50%; top: -48px;
-            transform: translateX(-50%); background: rgba(220, 138, 12, .7);
-            box-shadow: 0 -40px 30px 0 #dc8a0c, 0 40px 50px 0 #dc8a0c, inset 3px 0 2px 0 rgba(220, 138, 12, .6), inset -3px 0 2px 0 rgba(220, 138, 12, .6);
-        }
-        .glow:before {
-            width: 70%; height: 60%; left: 50%; transform: translateX(-50%); bottom: 0;
-            border-radius: 50%; background: rgba(0, 0, 0, 0.35);
-        }
-        .blinking-glow {
-            width: 100px; height: 180px; left: 50%; top: -55%; transform: translateX(-50%);
-            border-radius: 50%; background: #ff6000; filter: blur(60px); animation: blinkIt .1s infinite;
-        }
+        .glow { width: 26px; height: 60px; border-radius: 50% 50% 35% 35%; left: 50%; top: -48px; transform: translateX(-50%); background: rgba(220, 138, 12, .7); box-shadow: 0 -40px 30px 0 #dc8a0c, 0 40px 50px 0 #dc8a0c, inset 3px 0 2px 0 rgba(220, 138, 12, .6), inset -3px 0 2px 0 rgba(220, 138, 12, .6); }
+        .glow:before { width: 70%; height: 60%; left: 50%; transform: translateX(-50%); bottom: 0; border-radius: 50%; background: rgba(0, 0, 0, 0.35); }
+        .blinking-glow { width: 100px; height: 180px; left: 50%; top: -55%; transform: translateX(-50%); border-radius: 50%; background: #ff6000; filter: blur(60px); animation: blinkIt .1s infinite; }
         @keyframes blinkIt { 50% { opacity: .8; } }
-
-        /* REGRAS DE RESPONSIVIDADE PARA CELULARES */
         @media (min-width: 768px) { .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
         @media (min-width: 1024px) { .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
         @media (max-width: 767px) {
-            html {
-                font-size: 9.5px; /* Ajuste fino para caber mais texto */
-            }
-            .section-container h2 {
-                font-size: 3.2rem;
-            }
-            .section-container h3 {
-                font-size: 2.1rem;
-            }
-            .content-body {
-                font-size: 1.7rem;
-            }
-            .section-container {
-                padding: 6rem 0;
-            }
-            #sacerdote-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            #sacerdote-container > div {
-                 width: 100%;
-            }
-            #sacerdote-container p {
-                text-align: justify;
-            }
-             #sacerdote-container h2 {
-                text-align: center;
-            }
+            html { font-size: 9.5px; }
+            .section-container h2, #intro-screen article.impact p { font-size: 3.2rem; }
+            .section-container h3 { font-size: 2.1rem; }
+            .content-body, #intro-screen article { font-size: 1.7rem; }
+            .section-container { padding: 6rem 0; }
+            #sacerdote-container { flex-direction: column; text-align: center; }
+            #sacerdote-container > div { width: 100%; }
+            #sacerdote-container p { text-align: justify; }
+            #sacerdote-container h2 { text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <header class="hero-section hero-bg h-screen flex flex-col items-center justify-center text-center p-6 relative">
-        <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
-        <div class="relative z-10">
-            <h1 class="font-cinzel-hero text-4xl md:text-7xl font-bold uppercase tracking-widest text-gold-hero animate-pulse">Reivindique o Poder</h1>
-            <h2 class="font-cinzel-hero text-2xl md:text-4xl mt-2 text-white">Das Encruzilhadas</h2>
-            <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-300">
-                Uma jornada profunda e transformadora aos Mistérios da Deusa Tríplice. Guiado por Sacerdote Leonardo, este não é apenas um curso, é um chamado para sua maestria e devoção.
-            </p>
-            <a href="#inscrição" class="mt-10 inline-block bg-gold-hero text-gray-900 font-bold font-cinzel-hero tracking-wider uppercase py-4 px-10 rounded-lg transition-all duration-300 hover:shadow-gold-hero hover:scale-105">
-                Iniciar minha Jornada
-            </a>
-        </div>
-    </header>
-
-    <!-- Restante do conteúdo -->
-    <div class="content-body">
-        <main>
-            <div class="section-container">
-                <div class="max-w-4xl mx-auto text-center">
-                    <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-                         <svg style="width: 6.4rem; height: 6.4rem; color: #D4AF37;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-6m0 0V3m0 12h6M12 15H6m15-6H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h2 class="fade-in">Você Sente o Chamado da Encruzilhada?</h2>
-                    <p class="fade-in" style="transition-delay: 200ms; color: #a0a0a0; max-width: 80ch; margin: 1.5rem auto 0; text-align: justify;">
-                        É uma inquietação na alma, uma busca por sabedoria ancestral e poder pessoal. Hekate, a Rainha das Bruxas, Guardiã das Chaves e Senhora das Tochas, te chama para uma jornada de autoconhecimento, magia e devoção. Este caminho não é para todos. É para aqueles que ousam caminhar entre os mundos, que encaram suas sombras para encontrar sua luz mais brilhante.
-                    </p>
-                </div>
-            </div>
-
-            <div class="holder">
-                <div class="candle">
-                    <div class="thread"></div>
-                    <div class="glow"></div>
-                    <div class="flame"></div>
-                </div>
-            </div>
-
-            <div class="section-container">
-                <div class="text-center" style="margin-bottom: 6rem;">
-                    <h2 class="fade-in">A Senda das Tochas</h2>
-                    <p class="fade-in" style="transition-delay: 200ms; font-size: 2rem; color:#D4AF37; font-family: 'Cinzel', serif;">Uma Imersão Profunda nos Mistérios de Hekate</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="module-card fade-in">
-                        <div class="module-card-header">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                            <h3>Módulo 1: Fundamentos</h3>
-                        </div>
-                        <p><strong>Objetivo:</strong> Estabelecer o primeiro contato. Este módulo inicial remove o véu da mitologia popular para revelar a verdadeira face da Deusa Liminar, ensinando protocolos de respeito, oferenda e comunicação para uma conexão segura e reverente.</p>
-                    </div>
-                    <div class="module-card fade-in" style="transition-delay: 200ms;">
-                        <div class="module-card-header">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C11.5383 3.0563 11.2312 4.14849 11.1072 5.25H12.8928C12.7688 4.14849 12.4617 3.0563 12 2ZM13.0625 6.75C13.2031 5.09375 13.5 3.5 14.0312 2.0625C15.1953 3.61719 16 5.21094 16 7C16 8.27344 15.6328 9.48828 15 10.5L16.9688 12.4688C17.5117 11.9258 18 11.25 18 10.5C18 7.25 15.4375 5.34375 13.0625 6.75ZM8 7C8 5.21094 8.80469 3.61719 9.96875 2.0625C10.5 3.5 10.7969 5.09375 10.9375 6.75C8.5625 5.34375 6 7.25 6 10.5C6 11.25 6.48828 11.9258 7.03125 12.4688L9 10.5C8.36719 9.48828 8 8.27344 8 7ZM12 8.5C10.8954 8.5 10 9.39543 10 10.5C10 11.3281 10.4531 12.0625 11.1562 12.4688L10 17.5L11.5 22H12.5L14 17.5L12.8438 12.4688C13.5469 12.0625 14 11.3281 14 10.5C14 9.39543 13.1046 8.5 12 8.5Z"/></svg>
-                            <h3>Módulo 2: Práticas Avançadas</h3>
-                        </div>
-                        <p><strong>Objetivo:</strong> Forjar um teurgo competente. Dissecamos a engenharia do poder de Hekate, sua natureza, rituais e instrumentos. O aluno deixa de ser devoto para se tornar um operador capaz de executar rituais complexos com eficácia.</p>
-                    </div>
-                     <div class="module-card fade-in" style="transition-delay: 400ms;">
-                        <div class="module-card-header">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3.75h.008v.008h-.008v-.008z" /><path stroke-linecap="round" stroke-linejoin="round" d="M3 3l.867 1.872a3.75 3.75 0 11-3.488 4.965L3 3z" /></svg>
-                            <h3>Módulo 3: Rituais de Poder</h3>
-                        </div>
-                        <p><strong>Objetivo:</strong> Solidificar o praticante como Mestre da Encruzilhada. Um grimório de operações de poder, onde o teurgo, através de pacto formal, aprende a arte da manifestação, necromancia, e criação de servidores espirituais.</p>
-                    </div>
-                     <div class="module-card fade-in">
-                        <div class="module-card-header">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.8483 13.2323L19.919 4.60537L15.3117 8.34187L12 2.96912L8.68832 8.34187L4.08105 4.60537L5.15175 13.2323L2 14.9999L6.5 16.2166L7.54552 21.0309L12 17.5L16.4545 21.0309L17.5 16.2166L22 14.9999L18.8483 13.2323Z" /></svg>
-                            <h3>Módulo 4: Teurgia Cósmica</h3>
-                        </div>
-                        <p><strong>Objetivo:</strong> Elevar o mestre a um engenheiro cósmico. A perspectiva se expande da soberania pessoal para a responsabilidade cósmica, alinhando a Vontade com a Necessidade (Ananke) e operando em uma escala que afeta o equilíbrio dos mundos.</p>
-                    </div>
-                     <div class="module-card fade-in" style="transition-delay: 200ms;">
-                        <div class="module-card-header">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24C11.1278 24 10.2743 23.8507 9.47528 23.563C3.65525 21.6865 0 16.084 0 9.89758C0 9.28258 0.0888741 8.68633 0.252873 8.11883C0.84687 6.06907 2.30861 4.31682 4.29835 3.32183L4.54922 3.19633C4.69759 3.12258 4.87322 3.19633 4.94709 3.35883C6.39008 6.44857 8.99181 9.38758 12 9.38758C15.0082 9.38758 17.61 6.44857 19.0529 3.35883C19.1268 3.19633 19.3024 3.12258 19.4508 3.19633L19.7016 3.32183C21.6914 4.31682 23.1531 6.06907 23.7471 8.11883C23.9111 8.68633 24 9.28258 24 9.89758C24 16.084 20.3447 21.6865 14.5247 23.563C13.7257 23.8507 12.8722 24 12 24ZM12 10.8881C8.21404 10.8881 5.3783 7.50232 4.09043 4.54282C2.55162 5.30932 1.48037 6.67132 1.0565 8.36183C0.870501 9.07732 0.777002 9.80183 0.777002 10.5346C0.777002 16.1423 4.14828 21.1493 9.47528 22.8443C10.2743 23.1323 11.1278 23.2793 12 23.2793C12.8722 23.2793 13.7257 23.1323 14.5247 22.8443C19.8517 21.1493 23.223 16.1423 23.223 10.5346C23.223 9.80183 23.1295 9.07732 22.9435 8.36183C22.5196 6.67132 21.4484 5.30932 19.9096 4.54282C18.6217 7.50232 15.786 10.8881 12 10.8881Z" /></svg>
-                            <h3>Módulo 5: A Gênese das Sombras</h3>
-                        </div>
-                        <p><strong>Objetivo:</strong> Transformar o adepto em um demiurgo. A transição final da manipulação para a criação. Este módulo ensina a arte da teogonia: a criação de deuses, a arquitetura de reinos oníricos, e a manipulação dos fios do destino coletivo.</p>
-                    </div>
-                     <div class="module-card fade-in" style="transition-delay: 400ms;">
-                        <div class="module-card-header">
-                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
-                            <h3>Módulo 6: O Vazio Primordial</h3>
-                        </div>
-                        <p><strong>Objetivo:</strong> Atingir a união final com o Inmanifesto. A jornada para o Silêncio, a dissolução voluntária da identidade na fonte de tudo. Não se trata de aprender, mas de desaprender o próprio ser, transcendendo a dualidade.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background-color: #0A0A0A; padding: 10rem 0;">
-                <div class="section-container" style="padding: 0;">
-                    <div id="sacerdote-container" style="display: flex; align-items: center; gap: 5rem;">
-                        <div class="fade-in" style="flex-shrink: 0;">
-                            <img src="https://i.ibb.co/nXWYCV0/dasfdasffsa.jpg" alt="Retrato do Sacerdote Leonardo" style="border-radius: 50%; border: 4px solid rgba(212, 175, 55, 0.5); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); width: 300px; height: 300px; margin: 0 auto; object-fit: cover;">
-                        </div>
-                        <div class="fade-in" style="transition-delay: 200ms;">
-                            <h2 style="font-size: 3.5rem;">Seu Guia Nesta Jornada</h2>
-                            <p style="color: #D4AF37; font-family: 'Cinzel', serif; font-size: 2rem;">Sacerdote Leonardo</p>
-                            <p style="color: #a0a0a0; text-align: justify; margin-top: 1.5rem;">
-                                "Dediquei minha vida a trilhar os caminhos sinuosos de Hekate, não apenas como um estudioso, mas como Seu devoto. Minha missão é ser um farol para aqueles que são chamados, guiando-os com responsabilidade, profundidade e honra. Neste curso, eu não compartilharei apenas conhecimento; compartilharei a chama que arde em meu coração, a chama que me foi confiada pela própria Deusa. Estou aqui para caminhar ao seu lado, na escuridão e na luz."
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-container">
-                <div class="text-center" style="margin-bottom: 6rem;">
-                    <h2 class="fade-in">Vozes da Encruzilhada</h2>
-                    <p class="fade-in" style="transition-delay: 200ms; color: #D4AF37; font-family: 'Cinzel', serif; font-size: 2rem;">O que os iniciados dizem</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" style="max-width: 900px; margin: 0 auto;">
-                    <div style="background-color: #050505; padding: 3rem; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                        <p style="font-style: italic; color: #a0a0a0;">"Conheci o Leonardo de uma forma inusitada, como aliás, convém aos devotos de Hekate, a Deusa que nos conduz através dos labirintos da vida. Desde então, tenho acompanhado seu trabalho, sua dedicação como sacerdote, e as aulas, sempre muito didáticas e esclarecedoras. Sua caminhada inspira e ilumina a de todos que têm a oportunidade de aprender com ele. Que Hekate continue guiando seus passos e abrindo caminhos a todos nós."</p>
-                        <p style="text-align: right; margin-top: 1.5rem; font-weight: bold; color: #D4AF37; font-family: 'Cinzel', serif;">- Ana Luiza</p>
-                    </div>
-                    <div style="background-color: #050505; padding: 3rem; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                        <p style="font-style: italic; color: #a0a0a0;">"A Rainha dos três mundos nos ensina, a reconhecer quem é ponte e quem é muro. O Leonardo é um desses encontros que não poderiam acontecer, senão por Ela... Dedicação e legitimidade deveriam ser tochas e chaves nas buscas onde algumas pessoas se perdem, mas não aqui; O respaldo histórico e prático são lúmens que estabelecem os limites claros, de quem fez uma escolha genuína. Obrigada, por tudo, meu irmão precioso."</p>
-                        <p style="text-align: right; margin-top: 1.5rem; font-weight: bold; color: #D4AF37; font-family: 'Cinzel', serif;">- Nina Morun</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="inscrição" class="section-container text-center">
-                <h2 class="fade-in">A Encruzilhada Se Apresenta.</h2>
-                <p class="fade-in" style="transition-delay: 200ms; font-size: 2rem;">Qual caminho você irá escolher?</p>
-                <div class="fade-in" style="margin-top: 3rem; background-color: #050505; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; transition-delay: 400ms;">
-                    <h3 style="color: #D4AF37; font-size: 2.2rem;">Jornada Mágica: A Senda das Tochas</h3>
-                    <p style="margin-top: 1.5rem; color: #a0a0a0;">Acesso aos 6 módulos, comunidade exclusiva, rituais ao vivo e suporte direto com Sacerdote Leonardo.</p>
-                    <a href="https://wa.me/5541999767744?text=Olá%2C%20Sacerdote%20Leonardo!%20Tenho%20interesse%20na%20jornada%20'A%20Senda%20das%20Tochas'%20e%20gostaria%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" style="margin-top: 3rem; display: inline-block; background-color: #D4AF37; color: #000000; font-family: 'Cinzel', serif; font-weight: bold; text-transform: uppercase; padding: 1.5rem 3rem; border-radius: 8px; transition: all 0.3s ease; border: 2px solid #D4AF37;">
-                        Conversar com o Sacerdote
-                    </a>
-                    <p style="margin-top: 2rem; font-size: 1.4rem; color: #6e6e6e;">Clique para tirar suas dúvidas e saber os próximos passos para a sua inscrição.</p>
-                </div>
-                <p class="fade-in" style="margin-top: 3rem; font-size: 1.4rem; color: #6e6e6e; transition-delay: 600ms;">As vagas são limitadas para garantir uma experiência profunda e pessoal a cada iniciado.</p>
-            </div>
+    <!-- TELA DE INTRODUÇÃO -->
+    <div id="intro-screen">
+        <canvas id="intro-canvas"></canvas>
+        <main class="hidden">
+            <article class="hide">
+                <h2>Bem vindo a nossa encruzilhada</h2>
+            </article>
+            <article class="hide">
+                <p>aqui você encontrará o que precisa</p>
+            </article>
+            <article class="hide impact">
+                <p>Sinta-se a vontade</p>
+            </article>
         </main>
-        
-        <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 4rem;">
-            <p style="color: #6e6e6e;">&copy; 2025 Sacerdote Leonardo. Todos os direitos reservados.</p>
-            <p style="font-size: 1.2rem; color: #444; margin-top: 1rem;">Este caminho é de devoção e magia. Honre-o.</p>
-        </footer>
+        <script type="x-shader/x-fragment" id="intro-shader">#version 300 es
+        precision highp float;
+        out vec4 O;
+        uniform float time;
+        uniform vec2 resolution;
+        #define T (time+660.)
+        float rnd(vec2 p) {
+            p=fract(p*vec2(12.9898,78.233));
+            p+=dot(p,p+34.56);
+            return fract(p.x*p.y);
+        }
+        float noise(vec2 p) {
+            vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
+            float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);
+            return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+        }
+        float fbm(vec2 p) {
+            float t=.0, a=1., h=.0; mat2 m=mat2(1.,-1.2,.2,1.2);
+            for (float i=.0; i<5.; i++) {
+                t+=a*noise(p); p*=2.*m; a*=.5; h+=a;
+            }
+            return t/h;
+        }
+        void main() {
+            vec2 uv=(gl_FragCoord.xy-.5*resolution)/resolution.y;
+            vec3 col=vec3(1);
+            uv.x+=.25; uv*=vec2(2,1);
+            float n=fbm(uv*.28+vec2(-T*.01,0));
+            n=noise(uv*3.+n*2.);
+            col.r-=fbm(uv+vec2(0,T*.015)+n);
+            col.g-=fbm(uv*1.003+vec2(0,T*.015)+n+.003);
+            col.b-=fbm(uv*1.006+vec2(0,T*.015)+n+.006);
+            col=mix(col,vec3(1),dot(col,vec3(.21,.71,.07)));
+            col=mix(vec3(.08),col,min(time*.1,1.));
+            col=clamp(col,.08,1.);
+            O=vec4(col,1);
+        }</script>
     </div>
 
+    <!-- CONTEÚDO PRINCIPAL DO SITE (inicialmente oculto) -->
+    <div id="main-site" style="display: none; opacity: 0; transition: opacity 1.5s ease-in;">
+        <header class="hero-section hero-bg h-screen flex flex-col items-center justify-center text-center p-6 relative">
+            <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
+            <div class="relative z-10">
+                <h1 class="font-cinzel-hero text-4xl md:text-7xl font-bold uppercase tracking-widest text-gold-hero animate-pulse">Reivindique o Poder</h1>
+                <h2 class="font-cinzel-hero text-2xl md:text-4xl mt-2 text-white">Das Encruzilhadas</h2>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-300">
+                    Uma jornada profunda e transformadora aos Mistérios da Deusa Tríplice. Guiado por Sacerdote Leonardo, este não é apenas um curso, é um chamado para sua maestria e devoção.
+                </p>
+                <a href="#inscrição" class="mt-10 inline-block bg-gold-hero text-gray-900 font-bold font-cinzel-hero tracking-wider uppercase py-4 px-10 rounded-lg transition-all duration-300 hover:shadow-gold-hero hover:scale-105">
+                    Iniciar minha Jornada
+                </a>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <main>
+                <div class="section-container">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+                             <svg style="width: 6.4rem; height: 6.4rem; color: #D4AF37;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-6m0 0V3m0 12h6M12 15H6m15-6H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h2 class="fade-in">Você Sente o Chamado da Encruzilhada?</h2>
+                        <p class="fade-in" style="transition-delay: 200ms; color: #a0a0a0; max-width: 80ch; margin: 1.5rem auto 0; text-align: justify;">
+                            É uma inquietação na alma, uma busca por sabedoria ancestral e poder pessoal. Hekate, a Rainha das Bruxas, Guardiã das Chaves e Senhora das Tochas, te chama para uma jornada de autoconhecimento, magia e devoção. Este caminho não é para todos. É para aqueles que ousam caminhar entre os mundos, que encaram suas sombras para encontrar sua luz mais brilhante.
+                        </p>
+                    </div>
+                </div>
+                <div class="holder">
+                    <div class="candle">
+                        <div class="thread"></div>
+                        <div class="glow"></div>
+                        <div class="flame"></div>
+                    </div>
+                </div>
+                <div class="section-container">
+                    <div class="text-center" style="margin-bottom: 6rem;">
+                        <h2 class="fade-in">A Senda das Tochas</h2>
+                        <p class="fade-in" style="transition-delay: 200ms; font-size: 2rem; color:#D4AF37; font-family: 'Cinzel', serif;">Uma Imersão Profunda nos Mistérios de Hekate</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="module-card fade-in">
+                            <div class="module-card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                                <h3>Módulo 1: Fundamentos</h3>
+                            </div>
+                            <p><strong>Objetivo:</strong> Estabelecer o primeiro contato. Este módulo inicial remove o véu da mitologia popular para revelar a verdadeira face da Deusa Liminar, ensinando protocolos de respeito, oferenda e comunicação para uma conexão segura e reverente.</p>
+                        </div>
+                        <div class="module-card fade-in" style="transition-delay: 200ms;">
+                            <div class="module-card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C11.5383 3.0563 11.2312 4.14849 11.1072 5.25H12.8928C12.7688 4.14849 12.4617 3.0563 12 2ZM13.0625 6.75C13.2031 5.09375 13.5 3.5 14.0312 2.0625C15.1953 3.61719 16 5.21094 16 7C16 8.27344 15.6328 9.48828 15 10.5L16.9688 12.4688C17.5117 11.9258 18 11.25 18 10.5C18 7.25 15.4375 5.34375 13.0625 6.75ZM8 7C8 5.21094 8.80469 3.61719 9.96875 2.0625C10.5 3.5 10.7969 5.09375 10.9375 6.75C8.5625 5.34375 6 7.25 6 10.5C6 11.25 6.48828 11.9258 7.03125 12.4688L9 10.5C8.36719 9.48828 8 8.27344 8 7ZM12 8.5C10.8954 8.5 10 9.39543 10 10.5C10 11.3281 10.4531 12.0625 11.1562 12.4688L10 17.5L11.5 22H12.5L14 17.5L12.8438 12.4688C13.5469 12.0625 14 11.3281 14 10.5C14 9.39543 13.1046 8.5 12 8.5Z"/></svg>
+                                <h3>Módulo 2: Práticas Avançadas</h3>
+                            </div>
+                            <p><strong>Objetivo:</strong> Forjar um teurgo competente. Dissecamos a engenharia do poder de Hekate, sua natureza, rituais e instrumentos. O aluno deixa de ser devoto para se tornar um operador capaz de executar rituais complexos com eficácia.</p>
+                        </div>
+                         <div class="module-card fade-in" style="transition-delay: 400ms;">
+                            <div class="module-card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3.75h.008v.008h-.008v-.008z" /><path stroke-linecap="round" stroke-linejoin="round" d="M3 3l.867 1.872a3.75 3.75 0 11-3.488 4.965L3 3z" /></svg>
+                                <h3>Módulo 3: Rituais de Poder</h3>
+                            </div>
+                            <p><strong>Objetivo:</strong> Solidificar o praticante como Mestre da Encruzilhada. Um grimório de operações de poder, onde o teurgo, através de pacto formal, aprende a arte da manifestação, necromancia, e criação de servidores espirituais.</p>
+                        </div>
+                         <div class="module-card fade-in">
+                            <div class="module-card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.8483 13.2323L19.919 4.60537L15.3117 8.34187L12 2.96912L8.68832 8.34187L4.08105 4.60537L5.15175 13.2323L2 14.9999L6.5 16.2166L7.54552 21.0309L12 17.5L16.4545 21.0309L17.5 16.2166L22 14.9999L18.8483 13.2323Z" /></svg>
+                                <h3>Módulo 4: Teurgia Cósmica</h3>
+                            </div>
+                            <p><strong>Objetivo:</strong> Elevar o mestre a um engenheiro cósmico. A perspectiva se expande da soberania pessoal para a responsabilidade cósmica, alinhando a Vontade com a Necessidade (Ananke) e operando em uma escala que afeta o equilíbrio dos mundos.</p>
+                        </div>
+                         <div class="module-card fade-in" style="transition-delay: 200ms;">
+                            <div class="module-card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24C11.1278 24 10.2743 23.8507 9.47528 23.563C3.65525 21.6865 0 16.084 0 9.89758C0 9.28258 0.0888741 8.68633 0.252873 8.11883C0.84687 6.06907 2.30861 4.31682 4.29835 3.32183L4.54922 3.19633C4.69759 3.12258 4.87322 3.19633 4.94709 3.35883C6.39008 6.44857 8.99181 9.38758 12 9.38758C15.0082 9.38758 17.61 6.44857 19.0529 3.35883C19.1268 3.19633 19.3024 3.12258 19.4508 3.19633L19.7016 3.32183C21.6914 4.31682 23.1531 6.06907 23.7471 8.11883C23.9111 8.68633 24 9.28258 24 9.89758C24 16.084 20.3447 21.6865 14.5247 23.563C13.7257 23.8507 12.8722 24 12 24ZM12 10.8881C8.21404 10.8881 5.3783 7.50232 4.09043 4.54282C2.55162 5.30932 1.48037 6.67132 1.0565 8.36183C0.870501 9.07732 0.777002 9.80183 0.777002 10.5346C0.777002 16.1423 4.14828 21.1493 9.47528 22.8443C10.2743 23.1323 11.1278 23.2793 12 23.2793C12.8722 23.2793 13.7257 23.1323 14.5247 22.8443C19.8517 21.1493 23.223 16.1423 23.223 10.5346C23.223 9.80183 23.1295 9.07732 22.9435 8.36183C22.5196 6.67132 21.4484 5.30932 19.9096 4.54282C18.6217 7.50232 15.786 10.8881 12 10.8881Z" /></svg>
+                                <h3>Módulo 5: A Gênese das Sombras</h3>
+                            </div>
+                            <p><strong>Objetivo:</strong> Transformar o adepto em um demiurgo. A transição final da manipulação para a criação. Este módulo ensina a arte da teogonia: a criação de deuses, a arquitetura de reinos oníricos, e a manipulação dos fios do destino coletivo.</p>
+                        </div>
+                         <div class="module-card fade-in" style="transition-delay: 400ms;">
+                            <div class="module-card-header">
+                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+                                <h3>Módulo 6: O Vazio Primordial</h3>
+                            </div>
+                            <p><strong>Objetivo:</strong> Atingir a união final com o Inmanifesto. A jornada para o Silêncio, a dissolução voluntária da identidade na fonte de tudo. Não se trata de aprender, mas de desaprender o próprio ser, transcendendo a dualidade.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color: #0A0A0A; padding: 10rem 0;">
+                    <div class="section-container" style="padding: 0;">
+                        <div id="sacerdote-container" style="display: flex; align-items: center; gap: 5rem;">
+                            <div class="fade-in" style="flex-shrink: 0;">
+                                <img src="https://i.ibb.co/nXWYCV0/dasfdasffsa.jpg" alt="Retrato do Sacerdote Leonardo" style="border-radius: 50%; border: 4px solid rgba(212, 175, 55, 0.5); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); width: 300px; height: 300px; margin: 0 auto; object-fit: cover;">
+                            </div>
+                            <div class="fade-in" style="transition-delay: 200ms;">
+                                <h2 style="font-size: 3.5rem;">Seu Guia Nesta Jornada</h2>
+                                <p style="color: #D4AF37; font-family: 'Cinzel', serif; font-size: 2rem;">Sacerdote Leonardo</p>
+                                <p style="color: #a0a0a0; text-align: justify; margin-top: 1.5rem;">
+                                    "Dediquei minha vida a trilhar os caminhos sinuosos de Hekate, não apenas como um estudioso, mas como Seu devoto. Minha missão é ser um farol para aqueles que são chamados, guiando-os com responsabilidade, profundidade e honra. Neste curso, eu não compartilharei apenas conhecimento; compartilharei a chama que arde em meu coração, a chama que me foi confiada pela própria Deusa. Estou aqui para caminhar ao seu lado, na escuridão e na luz."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-container">
+                    <div class="text-center" style="margin-bottom: 6rem;">
+                        <h2 class="fade-in">Vozes da Encruzilhada</h2>
+                        <p class="fade-in" style="transition-delay: 200ms; color: #D4AF37; font-family: 'Cinzel', serif; font-size: 2rem;">O que os iniciados dizem</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" style="max-width: 900px; margin: 0 auto;">
+                        <div style="background-color: #050505; padding: 3rem; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                            <p style="font-style: italic; color: #a0a0a0;">"Conheci o Leonardo de uma forma inusitada, como aliás, convém aos devotos de Hekate, a Deusa que nos conduz através dos labirintos da vida. Desde então, tenho acompanhado seu trabalho, sua dedicação como sacerdote, e as aulas, sempre muito didáticas e esclarecedoras. Sua caminhada inspira e ilumina a de todos que têm a oportunidade de aprender com ele. Que Hekate continue guiando seus passos e abrindo caminhos a todos nós."</p>
+                            <p style="text-align: right; margin-top: 1.5rem; font-weight: bold; color: #D4AF37; font-family: 'Cinzel', serif;">- Ana Luiza</p>
+                        </div>
+                        <div style="background-color: #050505; padding: 3rem; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                            <p style="font-style: italic; color: #a0a0a0;">"A Rainha dos três mundos nos ensina, a reconhecer quem é ponte e quem é muro. O Leonardo é um desses encontros que não poderiam acontecer, senão por Ela... Dedicação e legitimidade deveriam ser tochas e chaves nas buscas onde algumas pessoas se perdem, mas não aqui; O respaldo histórico e prático são lúmens que estabelecem os limites claros, de quem fez uma escolha genuína. Obrigada, por tudo, meu irmão precioso."</p>
+                            <p style="text-align: right; margin-top: 1.5rem; font-weight: bold; color: #D4AF37; font-family: 'Cinzel', serif;">- Nina Morun</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="inscrição" class="section-container text-center">
+                    <h2 class="fade-in">A Encruzilhada Se Apresenta.</h2>
+                    <p class="fade-in" style="transition-delay: 200ms; font-size: 2rem;">Qual caminho você irá escolher?</p>
+                    <div class="fade-in" style="margin-top: 3rem; background-color: #050505; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; transition-delay: 400ms;">
+                        <h3 style="color: #D4AF37; font-size: 2.2rem;">Jornada Mágica: A Senda das Tochas</h3>
+                        <p style="margin-top: 1.5rem; color: #a0a0a0;">Acesso aos 6 módulos, comunidade exclusiva, rituais ao vivo e suporte direto com Sacerdote Leonardo.</p>
+                        <a href="https://wa.me/5541999767744?text=Olá%2C%20Sacerdote%20Leonardo!%20Tenho%20interesse%20na%20jornada%20'A%20Senda%20das%20Tochas'%20e%20gostaria%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" style="margin-top: 3rem; display: inline-block; background-color: #D4AF37; color: #000000; font-family: 'Cinzel', serif; font-weight: bold; text-transform: uppercase; padding: 1.5rem 3rem; border-radius: 8px; transition: all 0.3s ease; border: 2px solid #D4AF37;">
+                            Conversar com o Sacerdote
+                        </a>
+                        <p style="margin-top: 2rem; font-size: 1.4rem; color: #6e6e6e;">Clique para tirar suas dúvidas e saber os próximos passos para a sua inscrição.</p>
+                    </div>
+                    <p class="fade-in" style="margin-top: 3rem; font-size: 1.4rem; color: #6e6e6e; transition-delay: 600ms;">As vagas são limitadas para garantir uma experiência profunda e pessoal a cada iniciado.</p>
+                </div>
+            </main>
+            
+            <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 4rem;">
+                <p style="color: #6e6e6e;">&copy; 2025 Sacerdote Leonardo. Todos os direitos reservados.</p>
+                <p style="font-size: 1.2rem; color: #444; margin-top: 1rem;">Este caminho é de devoção e magia. Honre-o.</p>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- SCRIPT DA PÁGINA PRINCIPAL -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Animação de fade-in ao rolar a página
             const targets = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -364,15 +369,234 @@
                         entry.target.classList.add('visible');
                     }
                 });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.1
-            });
-            targets.forEach(target => {
-                observer.observe(target);
-            });
+            }, { rootMargin: '0px', threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
         });
     </script>
+
+    <!-- SCRIPT DA INTRODUÇÃO -->
+    <script>
+        // Full Renderer class provided by the user for the intro animation
+        class Renderer {
+         #vertexSrc = "#version 300 es\nprecision highp float;\nin vec4 position;\nvoid main(){gl_Position=position;}";
+         #fragmtSrc = "#version 300 es\nprecision highp float;\nout vec4 O;\nuniform float time;\nuniform vec2 resolution;\nvoid main() {\n\tvec2 uv=gl_FragCoord.xy/resolution;\n\tO=vec4(uv,sin(time)*.5+.5,1);\n}";
+         #vertices = [-1, 1, -1, -1, 1, 1, 1, -1];
+         constructor(canvas, scale) {
+           this.canvas = canvas;
+           this.scale = scale;
+           this.gl = canvas.getContext("webgl2");
+           this.gl.viewport(0, 0, canvas.width * scale, canvas.height * scale);
+           this.shaderSource = this.#fragmtSrc;
+           this.mouseCoords = [0, 0];
+           this.pointerCoords = [0, 0];
+           this.nbrOfPointers = 0;
+         }
+         get defaultSource() {
+           return this.#fragmtSrc;
+         }
+         updateShader(source) {
+           this.reset();
+           this.shaderSource = source;
+           this.setup();
+           this.init();
+         }
+         updateMouse(coords) {
+           this.mouseCoords = coords;
+         }
+         updatePointerCoords(coords) {
+           this.pointerCoords = coords;
+         }
+         updatePointerCount(nbr) {
+           this.nbrOfPointers = nbr;
+         }
+         updateScale(scale) {
+           this.scale = scale;
+           this.gl.viewport(
+             0,
+             0,
+             this.canvas.width * scale,
+             this.canvas.height * scale
+           );
+         }
+         compile(shader, source) {
+           const gl = this.gl;
+           gl.shaderSource(shader, source);
+           gl.compileShader(shader);
+           if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+             console.error(gl.getShaderInfoLog(shader));
+             this.canvas.dispatchEvent(
+               new CustomEvent("shader-error", { detail: gl.getShaderInfoLog(shader) })
+             );
+           }
+         }
+         test(source) {
+           let result = null;
+           const gl = this.gl;
+           const shader = gl.createShader(gl.FRAGMENT_SHADER);
+           gl.shaderSource(shader, source);
+           gl.compileShader(shader);
+           if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+             result = gl.getShaderInfoLog(shader);
+           }
+           if (gl.getShaderParameter(shader, gl.DELETE_STATUS)) {
+             gl.deleteShader(shader);
+           }
+           return result;
+         }
+         reset() {
+           const { gl, program, vs, fs } = this;
+           if (!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
+           if (gl.getShaderParameter(vs, gl.DELETE_STATUS)) {
+             gl.detachShader(program, vs);
+             gl.deleteShader(vs);
+           }
+           if (gl.getShaderParameter(fs, gl.DELETE_STATUS)) {
+             gl.detachShader(program, fs);
+             gl.deleteShader(fs);
+           }
+           gl.deleteProgram(program);
+         }
+         setup() {
+           const gl = this.gl;
+           this.vs = gl.createShader(gl.VERTEX_SHADER);
+           this.fs = gl.createShader(gl.FRAGMENT_SHADER);
+           this.compile(this.vs, this.#vertexSrc);
+           this.compile(this.fs, this.shaderSource);
+           this.program = gl.createProgram();
+           gl.attachShader(this.program, this.vs);
+           gl.attachShader(this.program, this.fs);
+           gl.linkProgram(this.program);
+           if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
+             console.error(gl.getProgramInfoLog(this.program));
+           }
+         }
+         init() {
+           const { gl, program } = this;
+           this.buffer = gl.createBuffer();
+           gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+           gl.bufferData(
+             gl.ARRAY_BUFFER,
+             new Float32Array(this.#vertices),
+             gl.STATIC_DRAW
+           );
+           const position = gl.getAttribLocation(program, "position");
+           gl.enableVertexAttribArray(position);
+           gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+           program.resolution = gl.getUniformLocation(program, "resolution");
+           program.time = gl.getUniformLocation(program, "time");
+           program.touch = gl.getUniformLocation(program, "touch");
+           program.pointerCount = gl.getUniformLocation(program, "pointerCount");
+           program.pointers = gl.getUniformLocation(program, "pointers");
+         }
+         render(now = 0) {
+           const {
+             gl,
+             program,
+             buffer,
+             canvas,
+             mouseCoords,
+             pointerCoords,
+             nbrOfPointers
+           } = this;
+
+           if (!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
+           gl.clearColor(0, 0, 0, 1);
+           gl.clear(gl.COLOR_BUFFER_BIT);
+           gl.useProgram(program);
+           gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+           gl.uniform2f(program.resolution, canvas.width, canvas.height);
+           gl.uniform1f(program.time, now * 1e-3);
+           gl.uniform2f(program.touch, ...mouseCoords);
+           gl.uniform1i(program.pointerCount, nbrOfPointers);
+           gl.uniform2fv(program.pointers, pointerCoords);
+           gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+         }
+        }
+
+        // Adapted logic to control the intro sequence
+        const transitionToSite = () => {
+            const introScreen = document.getElementById('intro-screen');
+            const mainSite = document.getElementById('main-site');
+            if (introScreen) {
+                introScreen.style.opacity = '0';
+                introScreen.addEventListener('transitionend', () => {
+                    introScreen.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    mainSite.style.display = 'block';
+                    setTimeout(() => mainSite.style.opacity = 1, 50);
+                }, { once: true });
+            }
+        };
+
+        function toggleArticles() {
+            let i = 0;
+            return function () {
+                const articles = document.querySelectorAll("#intro-screen article");
+                if (i > 0) {
+                    articles[i - 1].classList.add("hide");
+                }
+
+                if (i < articles.length) {
+                    articles[i].classList.remove("hide");
+                    i++;
+                } else {
+                    if (handle) {
+                        clearInterval(handle);
+                        handle = null;
+                    }
+                    setTimeout(transitionToSite, 5000);
+                }
+            };
+        }
+
+        const toggleArticle = toggleArticles();
+        let handle = null;
+
+        function showPhrases() {
+            const main = document.querySelector("#intro-screen main");
+            main.classList.remove("hidden");
+            toggleArticle();
+            handle = setInterval(toggleArticle, 5000);
+        }
+
+        function init() {
+            const canvas = document.getElementById('intro-canvas');
+            if (!canvas) { 
+                document.getElementById('main-site').style.display = 'block';
+                document.getElementById('main-site').style.opacity = 1;
+                document.body.style.overflow = 'auto';
+                return;
+            };
+            let renderer;
+            const dpr = Math.max(1, devicePixelRatio);
+            const resize = () => {
+                const { innerWidth: width, innerHeight: height } = window;
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                if (renderer) {
+                    renderer.updateScale(dpr);
+                }
+            };
+            const source = document.querySelector("#intro-screen script[type='x-shader/x-fragment']").textContent;
+            renderer = new Renderer(canvas, dpr);
+            renderer.setup();
+            renderer.init();
+            resize();
+            if (renderer.test(source) === null) {
+                renderer.updateShader(source);
+            }
+            window.addEventListener('resize', resize);
+            const loop = (now) => {
+                renderer.render(now);
+                requestAnimationFrame(loop);
+            };
+            loop(0);
+            setTimeout(showPhrases, 1000);
+        }
+
+        window.onload = init;
+    </script>
+
 </body>
 </html>
 
