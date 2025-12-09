@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Coven do Corvo | Mentoria de Alta Magia</title>
+    <title>Coven do Corvo | Egrégora dos Mistérios</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -21,23 +20,26 @@
             theme: {
                 extend: {
                     colors: {
-                        crow: {
-                            black: '#050505',
-                            dark: '#0a0a0a',
-                            charcoal: '#121212',
-                            gold: '#D4AF37',
-                            pale: '#EAEAEA',
-                            muted: '#888888'
-                        }
+                        void: '#020202',
+                        altar: '#080808',
+                        gold: {
+                            100: '#FBF5E5',
+                            300: '#E6C86E',
+                            400: '#D4AF37',
+                            500: '#B5952F',
+                            900: '#3D2E0F'
+                        },
+                        mist: '#888888',
+                        ash: '#1a1a1a'
                     },
                     fontFamily: {
                         cinzel: ['Cinzel', 'serif'],
-                        playfair: ['Playfair Display', 'serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
                         sans: ['Inter', 'sans-serif'],
                     },
                     backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'luxury': 'linear-gradient(to bottom, rgba(5,5,5,0.2), #050505), url("https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=2544&auto=format&fit=crop")',
+                        'hero-glow': 'radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, rgba(2, 2, 2, 0) 60%)',
+                        'texture': 'url("https://www.transparenttextures.com/patterns/stardust.png")'
                     }
                 }
             }
@@ -45,161 +47,347 @@
     </script>
 
     <style>
-        /* CSS Personalizado para Detalhes Finos */
+        /* CSS Avançado */
         body {
-            background-color: #050505;
+            background-color: #020202;
             color: #EAEAEA;
             overflow-x: hidden;
         }
-
-        /* Scrollbar Personalizada */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
-        }
-
-        /* Efeito Glassmorphism nos Cards */
-        .glass-card {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        
+        /* Glassmorphism Premium */
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.1);
-            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
         }
 
-        .glass-card:hover {
-            border-color: rgba(212, 175, 55, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+        /* Animações SVG */
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        .animate-spin-slow { transform-origin: center; animation: spin-slow 40s linear infinite; }
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        
+        /* Tipografia */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 1.5rem;
+            padding-top: 0.5rem;
+            color: #D4AF37;
         }
-
-        /* Texto Dourado com Gradiente */
-        .text-gradient-gold {
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        
+        .gold-gradient-text {
+            background: linear-gradient(to right, #B5952F, #FBF5E5, #D4AF37);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
-        /* Divisória Mística */
-        .divider-line {
+
+        /* Divisores */
+        .ornament-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 6rem 0;
+            opacity: 0.5;
+        }
+        .ornament-divider::before, .ornament-divider::after {
+            content: '';
             height: 1px;
+            width: 150px;
             background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-            width: 100%;
-            margin: 4rem 0;
-            opacity: 0.3;
         }
 
-        /* Animação de Brilho no Botão */
-        .btn-shine {
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-shine::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-        .btn-shine:hover::after {
-            left: 100%;
-            transition: 0.5s ease-in-out;
+        /* Citações */
+        blockquote {
+            border-left: 2px solid #D4AF37;
+            padding-left: 2rem;
+            margin: 4rem 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #9ca3af;
+            background: linear-gradient(90deg, rgba(212,175,55,0.05), transparent);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-gold-900 selection:text-white">
 
-    <nav class="fixed w-full z-50 top-0 left-0 bg-crow-black/90 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <i data-lucide="feather" class="text-crow-gold w-6 h-6"></i>
-                <span class="font-cinzel font-bold text-xl tracking-widest text-white">O Corvo</span>
+    <nav class="fixed w-full z-50 bg-void/95 backdrop-blur-md border-b border-white/5 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="font-cinzel font-bold text-2xl tracking-[0.2em] text-gold-400">COVEN</span>
+                <span class="font-sans text-[0.5rem] uppercase tracking-[0.6em] text-mist">Do Corvo</span>
             </div>
-            <div class="hidden md:flex items-center gap-8 font-sans text-sm tracking-widest uppercase text-crow-muted">
-                <a href="#sobre" class="hover:text-crow-gold transition-colors">O Chamado</a>
-                <a href="#mentor" class="hover:text-crow-gold transition-colors">O Sacerdote</a>
-                <a href="#jornada" class="hover:text-crow-gold transition-colors">A Senda</a>
-                <a href="#inscricao" class="border border-crow-gold text-crow-gold px-6 py-2 rounded-sm hover:bg-crow-gold hover:text-black transition-all">Junte-se ao Coven</a>
+            <div class="hidden md:flex gap-12 text-xs font-sans uppercase tracking-[0.2em] text-mist">
+                <a href="#manifesto" class="hover:text-gold-400 transition-colors duration-300">A Senda</a>
+                <a href="#teologia" class="hover:text-gold-400 transition-colors duration-300">Teologia</a>
+                <a href="#acervo" class="hover:text-gold-400 transition-colors duration-300">Grimório</a>
+                <a href="#tempo" class="hover:text-gold-400 transition-colors duration-300">Ritos</a>
+                <a href="#iniciacao" class="text-gold-400 border border-gold-400/30 px-6 py-2 hover:bg-gold-400 hover:text-black transition-all">Entrar</a>
             </div>
         </div>
     </nav>
 
-    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-luxury bg-cover bg-center bg-fixed bg-no-repeat">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-crow-black"></div>
+    <header class="relative min-h-screen flex items-center justify-center bg-hero-glow bg-fixed overflow-hidden">
+        <div class="absolute inset-0 bg-texture opacity-10 pointer-events-none"></div>
         
-        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto" data-aos="fade-up" data-aos-duration="1500">
-            <p class="font-sans text-crow-gold tracking-[0.3em] text-sm md:text-base uppercase mb-4">Alta Magia & Espiritualidade</p>
-            <h1 class="font-cinzel text-5xl md:text-8xl font-bold text-white mb-6 leading-tight">
-                Coven do <span class="text-gradient-gold">Corvo</span>
-            </h1>
-            <p class="font-playfair text-xl md:text-2xl text-gray-300 italic mb-10 max-w-2xl mx-auto font-light">
-                "Onde a sabedoria ancestral encontra a devota alma moderna. Uma mentoria para quem ousa voar na escuridão."
-            </p>
+        <div class="relative z-10 text-center px-6 max-w-5xl space-y-12" data-aos="fade-up" data-aos-duration="2000">
             
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-                <a href="#inscricao" class="btn-shine bg-crow-gold text-crow-black font-cinzel font-bold px-10 py-4 rounded-sm tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-                    Iniciar Iniciação
-                </a>
-                <a href="#sobre" class="flex items-center gap-2 text-white/80 hover:text-crow-gold transition-colors font-sans text-sm tracking-widest uppercase group">
-                    Descobrir mais
-                    <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+            <div class="flex justify-center">
+                <div class="w-px h-32 bg-gradient-to-b from-transparent via-gold-400 to-transparent"></div>
+            </div>
+            
+            <p class="font-sans text-gold-500 text-xs md:text-sm uppercase tracking-[0.6em] animate-pulse">Alta Magia • Teurgia • Devoção</p>
+            
+            <h1 class="font-cinzel text-5xl md:text-9xl font-bold text-white leading-tight">
+                Coven do <br> <span class="gold-gradient-text">Corvo</span>
+            </h1>
+            
+            <blockquote class="border-none p-0 m-0 max-w-3xl mx-auto text-center bg-transparent">
+                "Pois ela é a Guardiã das Chaves de todo o Cosmos; <br>
+                A que abre os portões do Amenti e ilumina a escuridão da alma."
+                <footer class="text-center justify-center text-xs mt-6 text-gold-400 uppercase tracking-widest not-italic">Papiros Mágicos Gregos (PGM IV)</footer>
+            </blockquote>
+
+            <div class="pt-8">
+                <a href="#manifesto" class="text-mist hover:text-white transition-colors flex flex-col items-center gap-4 group">
+                    <span class="text-[10px] uppercase tracking-widest group-hover:tracking-[0.2em] transition-all">Desvelar os Mistérios</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce text-gold-400"></i>
                 </a>
             </div>
         </div>
-
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce opacity-50">
-            <i data-lucide="chevron-down" class="text-white w-8 h-8"></i>
-        </div>
     </header>
 
-    <section id="sobre" class="py-24 px-6 bg-crow-black relative">
-        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-crow-gold/30 to-transparent"></div>
-        
-        <div class="max-w-4xl mx-auto text-center">
-            <i data-lucide="key" class="w-12 h-12 text-crow-gold mx-auto mb-6 opacity-80"></i>
-            <h2 class="font-cinzel text-3xl md:text-5xl text-white mb-8" data-aos="fade-up">A Encruzilhada Te Espera</h2>
+    <section id="manifesto" class="py-32 bg-altar relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="ornament-divider"><span class="text-gold-400 px-4 text-2xl">❖</span></div>
             
-            <div class="font-playfair text-lg md:text-xl text-gray-400 space-y-6 leading-relaxed text-justify md:text-center" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="font-cinzel text-4xl text-center text-white mb-16">O Chamado da Encruzilhada</h2>
+            
+            <div class="font-serif text-xl text-gray-400 space-y-8 leading-loose text-justify drop-cap">
                 <p>
-                    Sentir o chamado de Hekate não é apenas um interesse passageiro por mitologia. É uma inquietação na alma. É o olhar do Corvo que te observa do alto, esperando o momento em que você decidirá parar de caminhar e começará a voar.
+                    O mundo moderno esqueceu-se do silêncio. Em meio ao ruído incessante, a voz dos Deuses tornou-se um sussurro distante, ouvido apenas por aqueles que ousam caminhar na contramão. O <strong>Coven do Corvo</strong> não é uma escola, tampouco um mercado de feitiços. É uma egrégora forjada no fogo e na sombra, um ponto de encontro para almas que sentem o peso sagrado da devoção.
                 </p>
                 <p>
-                    O <strong class="text-crow-gold">Coven do Corvo</strong> não é um curso. É uma egrégora. É um espaço de transmutação onde o conhecimento teórico se torna poder prático. Aqui, nós não apenas estudamos a magia; nós a vivemos, respiramos e a manifestamos sob a proteção da Senhora das Chaves.
+                    Não prometemos facilidades. A magia de Hekate e os mistérios de Nyx exigem soberania. Exigem que o iniciado olhe para o abismo e encontre ali não o vazio, mas o útero fértil de toda a criação. Aqui, a teoria (Gnosis) e a prática (Praxis) dançam juntas sob o luar.
+                </p>
+                
+                <blockquote data-aos="fade-up">
+                    "Zeus, o Cronida, a honrou acima de todos e lhe deu presentes esplêndidos: <br>
+                    Ter uma parte na terra e no mar infecundo, <br>
+                    E no céu estrelado ela tem a sua parte na honra, <br>
+                    E é honrada acima de tudo pelos deuses imortais."
+                    <footer class="text-sm mt-4 text-gold-400 uppercase tracking-widest not-italic">— Hesíodo, Teogonia (v. 411-415)</footer>
+                </blockquote>
+
+                <p>
+                    Nossa irmandade busca restaurar a dignidade da Arte Mágica. Afastamo-nos do mercantilismo espiritual para abraçar a Teurgia, a obra divina. Somos guardiões da chama, observadores das estrelas, filhos da Noite Primordial.
                 </p>
             </div>
         </div>
     </section>
 
-    <section id="mentor" class="py-24 bg-[#080808]">
+    <section id="teologia" class="py-32 bg-void border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 animate-pulse"></div>
+
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-24">
+                <h2 class="font-cinzel text-4xl text-white mb-4">Teologia do Círculo</h2>
+                <p class="font-serif text-mist italic">Os dois pilares cósmicos que sustentam nossa prática.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-32 items-center">
+                
+                <div class="text-center md:text-right space-y-8" data-aos="fade-right">
+                    <div class="flex justify-center md:justify-end">
+                        <div class="w-64 h-64 relative">
+                            <svg viewBox="0 0 200 200" class="w-full h-full animate-float">
+                                <defs>
+                                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#B5952F;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <g class="animate-spin-slow" style="transform-origin: 100px 100px;">
+                                    <circle cx="100" cy="100" r="90" fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+                                    <circle cx="100" cy="100" r="85" fill="none" stroke="url(#goldGrad)" stroke-width="0.5"/>
+                                    <circle cx="100" cy="10" r="2" fill="#D4AF37" /> <circle cx="100" cy="190" r="2" fill="#D4AF37" />
+                                    <circle cx="10" cy="100" r="2" fill="#D4AF37" /> <circle cx="190" cy="100" r="2" fill="#D4AF37" />
+                                </g>
+                                <path d="M70 160 L130 40" stroke="#B5952F" stroke-width="3" stroke-linecap="round" />
+                                <path d="M130 160 L70 40" stroke="#B5952F" stroke-width="3" stroke-linecap="round" />
+                                <circle cx="100" cy="100" r="20" fill="none" stroke="#FBF5E5" stroke-width="2" />
+                                <circle cx="100" cy="100" r="5" fill="#FBF5E5" class="animate-pulse" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h3 class="font-cinzel text-3xl text-white">Hekate Soteira</h3>
+                    <p class="font-serif text-gray-400 leading-relaxed text-lg text-justify md:text-right">
+                        A Alma do Mundo (Anima Mundi). Ela é a força que anima a matéria e a luz que guia o retorno da alma. No Coven, Hekate não é apenas a senhora dos feitiços, mas a Hierofante Cósmica. Ela segura as chaves dos três reinos e nos ensina a arte da transmutação.
+                    </p>
+                    
+                    <blockquote class="border-r border-l-0 pr-6 pl-0 mr-0 ml-0 text-right bg-transparent">
+                        "Ela é a fonte das fontes, a matriz que contém tudo. <br>
+                        Dela jorra o fogo vivificante que não queima, mas ilumina."
+                        <footer class="text-sm mt-4 text-gold-400 uppercase tracking-widest not-italic">Oráculos Caldeus, Fragmento 34</footer>
+                    </blockquote>
+                </div>
+
+                <div class="text-center md:text-left space-y-8" data-aos="fade-left">
+                    <div class="flex justify-center md:justify-start">
+                        <div class="w-64 h-64 relative">
+                            <svg viewBox="0 0 200 200" class="w-full h-full animate-float" style="animation-delay: 1.5s;">
+                                <circle cx="40" cy="50" r="1.5" fill="white" class="animate-pulse" />
+                                <circle cx="160" cy="120" r="2" fill="white" class="animate-pulse" style="animation-delay: 0.5s;" />
+                                <circle cx="100" cy="30" r="2" fill="white" class="animate-pulse" style="animation-delay: 1s;" />
+                                <path d="M90 50 A 50 50 0 1 0 90 150 A 40 40 0 1 1 90 50" fill="#1a1a1a" stroke="#D4AF37" stroke-width="1.5" />
+                                <path d="M20 100 Q 100 180 180 100" stroke="#333" stroke-width="1" fill="none" opacity="0.6" />
+                                <path d="M20 110 Q 100 190 180 110" stroke="#333" stroke-width="1" fill="none" opacity="0.4" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h3 class="font-cinzel text-3xl text-white">Nyx Primordial</h3>
+                    <p class="font-serif text-gray-400 leading-relaxed text-lg text-justify">
+                        A Noite Inevitável. Nyx é a mãe dos mistérios, aquela que existe antes da luz e que permanecerá após ela. Honramos o seu silêncio como o útero de toda profecia. Nela, aprendemos que a escuridão não é o mal, mas o repouso necessário e a fonte de toda sabedoria oculta.
+                    </p>
+
+                    <blockquote class="bg-transparent">
+                        "Noite, geradora de deuses e homens, <br>
+                        Origem de todas as coisas, a ti nós chamamos."
+                        <footer class="text-sm mt-4 text-gold-400 uppercase tracking-widest not-italic">Hino Órfico à Nyx</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="acervo" class="py-32 bg-altar relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-start mb-24">
+                <div data-aos="fade-right">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i data-lucide="book-open" class="text-gold-400 w-6 h-6"></i>
+                        <span class="text-gold-500 font-sans text-xs tracking-widest uppercase">Acervo Fechado</span>
+                    </div>
+                    <h2 class="font-cinzel text-4xl text-white mb-6">A Biblioteca de Alexandria Digital</h2>
+                    <p class="font-serif text-xl text-gray-400 leading-loose text-justify">
+                        Esqueça a superficialidade das redes sociais. Nossa plataforma é um <strong>Grimório Vivo</strong>. Não entregamos apenas "aulas", mas tratados completos sobre a Arte Mágica. Nosso acervo é uma curadoria de anos, unindo a precisão acadêmica à potência da prática devocional.
+                    </p>
+                    <p class="font-serif text-lg text-mist leading-relaxed text-justify mt-6">
+                        Ao entrar no Coven, você destranca o acesso a traduções exclusivas dos Papiros Mágicos Gregos (PGM), estudos sobre a Necromancia Clássica e a Teurgia Neoplatônica, tudo adaptado para o praticante moderno.
+                    </p>
+                </div>
+                
+                <div class="space-y-6" data-aos="fade-left">
+                    <div class="glass-panel p-6 border-l-2 border-gold-400">
+                        <h4 class="font-cinzel text-gold-100 text-lg mb-2">Trilha I: A Arquiteta Habitada</h4>
+                        <p class="text-sm text-gray-400 font-serif italic">"A construção do Templo Interior e a Purificação"</p>
+                        <p class="text-xs text-mist mt-2">Baseado nos ritos de Katharmos e na preparação do Vaso.</p>
+                    </div>
+                    <div class="glass-panel p-6 border-l-2 border-gold-500 opacity-80">
+                        <h4 class="font-cinzel text-gold-100 text-lg mb-2">Trilha II: Sinfonia dos Sentidos</h4>
+                        <p class="text-sm text-gray-400 font-serif italic">"A percepção sutil e a comunicação com Daemons"</p>
+                        <p class="text-xs text-mist mt-2">Exercícios de expansão sensorial e transe.</p>
+                    </div>
+                    <div class="glass-panel p-6 border-l-2 border-gold-600 opacity-60">
+                        <h4 class="font-cinzel text-gold-100 text-lg mb-2">Trilha III: O Fogo e a Chave</h4>
+                        <p class="text-sm text-gray-400 font-serif italic">"Teurgia Prática com Hekate"</p>
+                        <p class="text-xs text-mist mt-2">Consagração de instrumentos e estátuas (Telestikê).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tempo" class="py-32 bg-void relative">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            
+            <div data-aos="fade-right">
+                <h2 class="font-cinzel text-4xl text-white mb-6">O Tempo Sagrado (Kairos)</h2>
+                <div class="w-20 h-1 bg-gold-400 mb-8"></div>
+                <p class="font-serif text-xl text-gray-400 leading-loose text-justify mb-8">
+                    A doença do mundo moderno é viver desconectado dos ciclos. No Coven, restauramos o ritmo. Nossa plataforma possui um <strong>Calendário Litúrgico</strong> integrado que calcula astronomicamente os momentos de poder.
+                </p>
+                <p class="font-serif text-lg text-mist leading-relaxed text-justify">
+                    Você não precisará mais calcular manualmente quando é o <em>Deipnon</em> (a Lua Negra) ou a <em>Noumenia</em>. O sistema alerta a egrégora, sincronizando nossas práticas. Quando um acende a tocha, todos acendem.
+                </p>
+            </div>
+
+            <div class="relative" data-aos="fade-left">
+                <div class="absolute -inset-4 bg-gold-900/20 blur-3xl rounded-full"></div>
+                
+                <div class="glass-panel p-10 rounded-sm relative z-10 border-t border-gold-400/30">
+                    <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
+                        <span class="font-cinzel text-gold-400 tracking-widest text-lg">Dezembro 2025</span>
+                        <div class="flex items-center gap-2 text-xs text-gray-400 uppercase tracking-widest">
+                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            Ao Vivo
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mb-10">
+                        <p class="font-sans text-[10px] tracking-[0.4em] uppercase text-mist mb-2">Ciclo Atual</p>
+                        <h3 class="font-cinzel text-4xl text-white mb-2">Lua Minguante</h3>
+                        <p class="font-serif italic text-gold-500 text-sm">Gibosa (Waning Gibbous) • Preparação para o Escuro</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-r from-void to-transparent p-4 border-l-2 border-gold-400 flex justify-between items-center">
+                            <div>
+                                <p class="text-white font-cinzel text-lg">Deipnon de Hekate</p>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-wider">A Ceia da Lua Negra</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-xl text-gold-400 font-bold font-cinzel">19</span>
+                                <span class="text-[10px] text-gray-500 uppercase">Dezembro</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-void to-transparent p-4 border-l-2 border-gray-700 flex justify-between items-center opacity-70">
+                            <div>
+                                <p class="text-white font-cinzel text-lg">Noumenia</p>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-wider">Abertura de Caminhos</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-xl text-gray-300 font-bold font-cinzel">20</span>
+                                <span class="text-[10px] text-gray-500 uppercase">Dezembro</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <p class="text-[10px] text-mist font-serif italic">"O tempo é a sombra da eternidade em movimento."</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="sacerdote" class="py-24 bg-[#080808]">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             
             <div class="relative order-2 md:order-1" data-aos="fade-right">
-                <div class="absolute inset-0 border border-crow-gold/30 translate-x-4 translate-y-4 rounded-sm"></div>
-                <div class="relative z-10 aspect-[3/4] overflow-hidden rounded-sm shadow-2xl shadow-crow-gold/10">
-                    <img src="https://i.ibb.co/nXWYCV0/dasfdasffsa.jpg" alt="Sacerdote Leonardo" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                <div class="absolute inset-0 border border-gold-400/30 translate-x-4 translate-y-4 rounded-sm"></div>
+                <div class="relative z-10 aspect-[3/4] overflow-hidden rounded-sm shadow-2xl shadow-gold-400/10">
+                    <img src="https://ibb.co/Sw54tdSt" alt="Sacerdote Leonardo" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent h-40"></div>
                 </div>
             </div>
 
             <div class="order-1 md:order-2" data-aos="fade-left">
-                <p class="font-sans text-crow-gold tracking-widest text-sm uppercase mb-2">Seu Guia</p>
+                <p class="font-sans text-gold-400 tracking-widest text-sm uppercase mb-2">Seu Guia</p>
                 <h2 class="font-cinzel text-4xl md:text-5xl text-white mb-6">Sacerdote Leonardo</h2>
-                <div class="w-20 h-1 bg-crow-gold mb-8"></div>
+                <div class="w-20 h-1 bg-gold-400 mb-8"></div>
                 
-                <p class="font-playfair text-gray-400 text-lg leading-relaxed mb-6">
+                <p class="font-serif text-gray-400 text-lg leading-relaxed mb-6">
                     "Dediquei minha vida a decifrar os sussurros das encruzilhadas. Não sou apenas um acadêmico dos mistérios, sou um praticante que conhece o peso e a glória de servir à Hekate."
                 </p>
                 <p class="font-sans text-gray-500 leading-relaxed mb-8">
@@ -209,161 +397,124 @@
                 <div class="flex items-center gap-4">
                     <div class="flex flex-col">
                         <span class="font-cinzel text-2xl text-white">10+</span>
-                        <span class="text-xs text-gray-500 uppercase tracking-wider">Módulos</span>
+                        <span class="text-xs text-gray-500 uppercase tracking-wider">Anos de Senda</span>
                     </div>
                     <div class="w-px h-10 bg-gray-800"></div>
                     <div class="flex flex-col">
                         <span class="font-cinzel text-2xl text-white">∞</span>
-                        <span class="text-xs text-gray-500 uppercase tracking-wider">Acesso Vitalício</span>
+                        <span class="text-xs text-gray-500 uppercase tracking-wider">Compromisso</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="container mx-auto px-6"><div class="divider-line"></div></div>
-
-    <section id="jornada" class="py-20 px-6 bg-crow-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="font-cinzel text-4xl text-white mb-4">A Senda das Tochas</h2>
-                <p class="text-gray-500 font-sans uppercase tracking-widest text-sm">O Currículo da Mentoria</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glass-card p-10 rounded-sm relative group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="absolute top-6 right-6 text-crow-gold/20 font-cinzel text-6xl font-bold group-hover:text-crow-gold/40 transition-colors">I</div>
-                    <h3 class="font-cinzel text-xl text-crow-gold mb-4">Fundamentos da Arte</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Removendo o véu da mitologia popular. Aprenda os protocolos reais de respeito, oferenda e a conexão segura com a Deusa Liminar.
-                    </p>
-                </div>
-
-                <div class="glass-card p-10 rounded-sm relative group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="absolute top-6 right-6 text-crow-gold/20 font-cinzel text-6xl font-bold group-hover:text-crow-gold/40 transition-colors">II</div>
-                    <h3 class="font-cinzel text-xl text-crow-gold mb-4">Práticas Avançadas</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        A engenharia do poder. Deixe de ser apenas um devoto para se tornar um operador capaz de executar rituais complexos.
-                    </p>
-                </div>
-
-                <div class="glass-card p-10 rounded-sm relative group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="absolute top-6 right-6 text-crow-gold/20 font-cinzel text-6xl font-bold group-hover:text-crow-gold/40 transition-colors">III</div>
-                    <h3 class="font-cinzel text-xl text-crow-gold mb-4">Rituais de Poder</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        O grimório prático. Pactos, arte da manifestação e a criação de servidores espirituais sob a tutela do Corvo.
-                    </p>
-                </div>
-
-                <div class="glass-card p-10 rounded-sm relative group" data-aos="fade-up" data-aos-delay="400">
-                    <div class="absolute top-6 right-6 text-crow-gold/20 font-cinzel text-6xl font-bold group-hover:text-crow-gold/40 transition-colors">IV</div>
-                    <h3 class="font-cinzel text-xl text-crow-gold mb-4">Teurgia Cósmica</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Alinhando a Vontade com a Necessidade (Ananke). Operando em uma escala que afeta o equilíbrio dos mundos.
-                    </p>
-                </div>
-
-                <div class="glass-card p-10 rounded-sm relative group" data-aos="fade-up" data-aos-delay="500">
-                    <div class="absolute top-6 right-6 text-crow-gold/20 font-cinzel text-6xl font-bold group-hover:text-crow-gold/40 transition-colors">V</div>
-                    <h3 class="font-cinzel text-xl text-crow-gold mb-4">Gênese das Sombras</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        A arte da teogonia: criação de egrégoras, arquitetura de reinos oníricos e manipulação do destino.
-                    </p>
-                </div>
-
-                <div class="glass-card p-10 rounded-sm relative group" data-aos="fade-up" data-aos-delay="600">
-                    <div class="absolute top-6 right-6 text-crow-gold/20 font-cinzel text-6xl font-bold group-hover:text-crow-gold/40 transition-colors">VI</div>
-                    <h3 class="font-cinzel text-xl text-crow-gold mb-4">Vazio Primordial</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        A união final com o Inmanifesto. Transcendendo a dualidade e encontrando o silêncio absoluto.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-[#080808] relative overflow-hidden">
-        <i data-lucide="quote" class="absolute top-10 left-10 text-crow-gold/5 w-64 h-64 -rotate-12"></i>
-        
-        <div class="max-w-5xl mx-auto px-6 relative z-10">
-            <h2 class="text-center font-cinzel text-3xl text-white mb-16">Ecos do Coven</h2>
+    <section class="py-32 bg-void relative">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="ornament-divider"><span class="text-gold-400 font-cinzel">Desmos (O Vínculo)</span></div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="bg-crow-charcoal p-8 border-l-2 border-crow-gold shadow-lg" data-aos="fade-right">
-                    <p class="font-playfair text-gray-300 italic mb-6">"O Leonardo é um desses encontros que não poderiam acontecer, senão por Ela... O respaldo histórico e prático são lúmens que estabelecem os limites claros."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-crow-gold flex items-center justify-center text-crow-black font-bold font-cinzel">N</div>
-                        <div>
-                            <p class="text-white font-cinzel text-sm">Nina Morun</p>
-                            <p class="text-crow-muted text-xs uppercase">Iniciada</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-crow-charcoal p-8 border-l-2 border-crow-gold shadow-lg" data-aos="fade-left">
-                    <p class="font-playfair text-gray-300 italic mb-6">"Sua caminhada inspira e ilumina. Aulas sempre muito didáticas e esclarecedoras. Que Hekate continue guiando seus passos."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-crow-gold flex items-center justify-center text-crow-black font-bold font-cinzel">A</div>
-                        <div>
-                            <p class="text-white font-cinzel text-sm">Ana Luiza</p>
-                            <p class="text-crow-muted text-xs uppercase">Iniciada</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="inscricao" class="py-32 px-6 bg-crow-black relative text-center">
-        <div class="max-w-4xl mx-auto glass-card p-12 md:p-20 border border-crow-gold/20 shadow-[0_0_50px_rgba(212,175,55,0.1)] rounded-sm">
-            <i data-lucide="feather" class="w-16 h-16 text-crow-gold mx-auto mb-8 animate-pulse"></i>
-            <h2 class="font-cinzel text-4xl md:text-6xl text-white mb-6">O Portão Está Aberto</h2>
-            <p class="font-sans text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
-                As vagas para o Coven do Corvo são limitadas para garantir a qualidade da egrégora. Se você sente que seu lugar é aqui, não hesite.
+            <h2 class="font-cinzel text-3xl text-white mb-8">A Santidade da Egrégora</h2>
+            
+            <p class="font-serif text-xl text-gray-400 leading-loose mb-12 max-w-3xl mx-auto">
+                No Coven do Corvo, a comunidade é um templo. Nosso círculo no WhatsApp é fechado, monitorado e sagrado. É um espaço de troca genuína, livre de julgamentos e competições egoicas.
             </p>
-            
-            <a href="https://wa.me/5541999767744?text=Salve%20Sacerdote%20Leonardo!%20Sinto%20o%20chamado%20do%20Corvo%20e%20gostaria%20de%20aplicar%20para%20a%20Mentoria." target="_blank" class="inline-flex items-center gap-3 bg-crow-gold text-crow-black font-cinzel font-bold text-lg px-12 py-5 rounded-sm hover:bg-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-crow-gold/20">
-                <span>Falar com o Sacerdote</span>
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-            </a>
-            
-            <p class="mt-8 text-xs text-gray-600 uppercase tracking-widest">Acesso Vitalício • Comunidade Exclusiva • Rituais ao Vivo</p>
+
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="border border-white/5 p-8 bg-altar hover:border-gold-400/30 transition-colors">
+                    <i data-lucide="shield" class="text-gold-900 w-8 h-8 mb-6"></i>
+                    <h4 class="font-cinzel text-gold-400 mb-2 text-xl">Proteção</h4>
+                    <p class="text-sm text-gray-500 font-serif">Um ambiente seguro onde sua jornada é respeitada e seus dados preservados. O sigilo é nossa lei.</p>
+                </div>
+                <div class="border border-white/5 p-8 bg-altar hover:border-gold-400/30 transition-colors">
+                    <i data-lucide="scale" class="text-gold-900 w-8 h-8 mb-6"></i>
+                    <h4 class="font-cinzel text-gold-400 mb-2 text-xl">Ética</h4>
+                    <p class="text-sm text-gray-500 font-serif">Repudiamos a exploração da fé. O conhecimento é sagrado, não uma mercadoria de troca.</p>
+                </div>
+                <div class="border border-white/5 p-8 bg-altar hover:border-gold-400/30 transition-colors">
+                    <i data-lucide="users" class="text-gold-900 w-8 h-8 mb-6"></i>
+                    <h4 class="font-cinzel text-gold-400 mb-2 text-xl">Irmandade</h4>
+                    <p class="text-sm text-gray-500 font-serif">O isolamento do magista acaba aqui. Caminhamos juntos, como um bando que vigia a noite.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer class="bg-[#020202] py-12 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <i data-lucide="feather" class="text-gray-600 w-5 h-5"></i>
-                <span class="font-cinzel font-bold text-lg text-gray-500">O Corvo</span>
+    <section id="iniciacao" class="py-32 bg-altar relative border-t border-white/5">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="glass-panel p-12 md:p-24 rounded-sm text-center relative overflow-hidden shadow-[0_0_100px_rgba(212,175,55,0.05)]">
+                
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-50"></div>
+                <i data-lucide="key" class="w-16 h-16 text-gold-400 mx-auto mb-8 animate-pulse"></i>
+
+                <h2 class="font-cinzel text-4xl md:text-6xl text-white mb-6">O Portão se Abre</h2>
+                
+                <p class="font-serif text-xl text-gray-400 mb-16 max-w-3xl mx-auto leading-relaxed">
+                    Não cobramos pelo sagrado, mas pedimos uma contribuição justa para manter o templo digital erguido. Uma assinatura única que garante o acesso a todo o acervo, ao calendário e à comunidade.
+                </p>
+
+                <div class="inline-block bg-void/50 border border-gold-400/20 p-12 rounded-sm mb-12 hover:border-gold-400/40 transition-colors min-w-[300px]">
+                    <p class="text-gold-500 font-sans text-[10px] uppercase tracking-[0.3em] mb-6">Contribuição de Manutenção</p>
+                    <div class="flex items-baseline justify-center gap-2">
+                        <span class="text-sm text-gray-500">R$</span>
+                        <span class="text-7xl font-cinzel text-white font-medium">40</span>
+                        <span class="text-xl text-gray-500">/mês</span>
+                    </div>
+                    <div class="w-full h-px bg-white/10 my-8"></div>
+                    <ul class="text-left space-y-4 text-sm text-gray-400 font-serif italic">
+                        <li class="flex gap-4 items-center"><i data-lucide="check" class="w-4 h-4 text-gold-400"></i> Acesso Integral ao Grimório</li>
+                        <li class="flex gap-4 items-center"><i data-lucide="check" class="w-4 h-4 text-gold-400"></i> Calendário Ritualístico Ativo</li>
+                        <li class="flex gap-4 items-center"><i data-lucide="check" class="w-4 h-4 text-gold-400"></i> Ingresso na Egrégora (WhatsApp)</li>
+                        <li class="flex gap-4 items-center"><i data-lucide="check" class="w-4 h-4 text-gold-400"></i> Orientação Sacerdotal</li>
+                    </ul>
+                </div>
+
+                <div class="block">
+                    <a href="https://wa.me/5541999767744?text=Salve%20Sacerdote%20Leonardo!%20Peço%20permissão%20para%20ingressar%20no%20Coven%20do%20Corvo." target="_blank" class="inline-flex items-center gap-4 bg-gold-400 hover:bg-white text-black font-cinzel font-bold text-lg px-12 py-5 rounded-sm transition-all duration-300 transform hover:-translate-y-1 shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                        <span>Iniciar Jornada</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                
+                <p class="mt-10 text-[10px] text-gray-600 font-sans uppercase tracking-widest">
+                    Sem fidelidade • Cancele quando o seu ciclo se encerrar
+                </p>
             </div>
-            <p class="text-gray-700 text-sm font-sans">© 2025 Sacerdote Leonardo. Todos os direitos reservados.</p>
-            <div class="flex gap-4">
-                <a href="#" class="text-gray-600 hover:text-crow-gold transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                <a href="#" class="text-gray-600 hover:text-crow-gold transition-colors"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+        </div>
+    </section>
+
+    <footer class="bg-black py-16 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-8">
+            <div class="opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
+                 <i data-lucide="feather" class="text-gold-900 w-10 h-10"></i>
+            </div>
+            <div class="text-center space-y-2">
+                <p class="text-gray-500 text-[10px] font-sans tracking-[0.3em] uppercase">© 2025 Coven do Corvo • Curitiba, PR</p>
+                <p class="text-gray-700 text-[10px] font-serif italic max-w-md mx-auto">
+                    "A magia é a arte de causar mudanças na consciência de acordo com a Vontade."
+                </p>
+            </div>
+            <div class="flex gap-6 opacity-40">
+                <i data-lucide="instagram" class="w-5 h-5 hover:text-gold-400 transition-colors cursor-pointer"></i>
+                <i data-lucide="youtube" class="w-5 h-5 hover:text-gold-400 transition-colors cursor-pointer"></i>
             </div>
         </div>
     </footer>
 
     <script>
-        // Inicializa Icones
         lucide.createIcons();
-        
-        // Inicializa Animações ao Scroll
         AOS.init({
             once: true,
             offset: 100,
-            duration: 800,
-            easing: 'ease-out-cubic',
+            duration: 1200,
+            easing: 'ease-out-cubic'
         });
 
-        // Navbar Efeito Blur ao rolar
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
-                navbar.classList.add('bg-crow-black/95', 'shadow-lg');
+                nav.classList.add('shadow-2xl', 'bg-void/95');
             } else {
-                navbar.classList.remove('bg-crow-black/95', 'shadow-lg');
+                nav.classList.remove('shadow-2xl', 'bg-void/80');
             }
         });
     </script>
